@@ -8,6 +8,7 @@
   --input-border: #6b7280;
   --primary: #1d4ed8;
   --primary-hover: #1e40af;
+  --primary-text: #1d4ed8;
   --known: #15803d;
   --known-hover: #166534;
   --known-soft: #dcfce7;
@@ -17,6 +18,7 @@
   --learning-soft: #fef3c7;
   --learning-soft-text: #92400e;
   --danger: #b91c1c;
+  --danger-text: #b91c1c;
   --danger-soft: #fee2e2;
   --danger-soft-text: #991b1b;
   --new-soft: #e5e7eb;
@@ -30,6 +32,30 @@
   --space-5: 1.5rem;
   --space-6: 2rem;
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #111827;
+  --surface: #1f2937;
+  --surface-alt: #172554;
+  --text: #f9fafb;
+  --text-muted: #d1d5db;
+  --border: #374151;
+  --input-border: #9ca3af;
+  --primary-text: #93c5fd;
+  --known-soft: #14532d;
+  --known-soft-text: #bbf7d0;
+  --learning-soft: #78350f;
+  --learning-soft-text: #fde68a;
+  --danger-text: #fca5a5;
+  --danger-soft: #450a0a;
+  --danger-soft-text: #fecaca;
+  --new-soft: #374151;
+  --new-soft-text: #e5e7eb;
+  --focus: #a78bfa;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  color-scheme: dark;
 }
 
 *,
@@ -88,6 +114,11 @@ p {
 h1 {
   font-size: 1.5rem;
   line-height: 1.2;
+}
+
+/* Pushes the stats and theme toggle together to the right. */
+.header-inner h1 {
+  margin-right: auto;
 }
 
 .stats {
@@ -176,11 +207,11 @@ textarea:focus-visible {
 }
 
 textarea[aria-invalid="true"] {
-  border-color: var(--danger);
+  border-color: var(--danger-text);
 }
 
 .form-error {
-  color: var(--danger);
+  color: var(--danger-text);
   font-weight: 600;
   margin-bottom: var(--space-3);
 }
@@ -226,20 +257,32 @@ textarea[aria-invalid="true"] {
 .btn-learning:hover { background: var(--learning-hover); }
 
 .btn-secondary {
-  color: var(--primary);
+  color: var(--primary-text);
   background: var(--surface);
-  border-color: var(--primary);
+  border-color: var(--primary-text);
 }
 
 .btn-secondary:hover { background: var(--surface-alt); }
 
 .btn-danger {
-  color: var(--danger);
+  color: var(--danger-text);
   background: var(--surface);
-  border-color: var(--danger);
+  border-color: var(--danger-text);
 }
 
 .btn-danger:hover { background: var(--danger-soft); }
+
+/* Matches the headline: its text color as the fill, the header background as the label. */
+.theme-toggle {
+  color: var(--surface);
+  background: var(--text);
+  border-color: var(--text);
+}
+
+.theme-toggle:hover {
+  background: var(--text-muted);
+  border-color: var(--text-muted);
+}
 
 .card-form .btn {
   align-self: flex-start;

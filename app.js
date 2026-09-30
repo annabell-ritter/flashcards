@@ -1,6 +1,8 @@
 "use strict";
 
 const STORAGE_KEY = "flashcards.cards";
+// The inline script in index.html repeats this key. Keep both in sync.
+const THEME_KEY = "flashcards.theme";
 const STATUSES = ["new", "known", "learning"];
 const STATUS_LABELS = { new: "New", known: "Known", learning: "Still learning" };
 
@@ -58,6 +60,24 @@ function saveCards() {
   els.storageWarning.hidden = saved;
 }
 
+// Returns "light" when the value is missing, malformed, or storage is unavailable.
+function loadTheme() {
+  try {
+    return localStorage.getItem(THEME_KEY) === "dark" ? "dark" : "light";
+  } catch (err) {
+    return "light";
+  }
+}
+
+// The theme still applies for this visit if storage fails.
+function saveTheme(theme) {
+  try {
+    localStorage.setItem(THEME_KEY, theme);
+  } catch (err) {
+    // Ignore.
+  }
+}
+
 function createId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 }
@@ -73,6 +93,7 @@ const state = {
 
 const els = {
   stats: document.getElementById("stats"),
+  themeToggle: document.getElementById("theme-toggle"),
   storageWarning: document.getElementById("storage-warning"),
   form: document.getElementById("card-form"),
   question: document.getElementById("question"),
@@ -351,6 +372,17 @@ function deleteCard(id) {
   render();
 }
 
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  els.themeToggle.textContent = theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode";
+}
+
+function toggleTheme() {
+  const theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  applyTheme(theme);
+  saveTheme(theme);
+}
+
 function flipCard() {
   state.flipped = !state.flipped;
   renderReview();
@@ -401,6 +433,7 @@ function handleFormKeydown(event) {
   }
 }
 
+els.themeToggle.addEventListener("click", toggleTheme);
 els.form.addEventListener("submit", addCard);
 els.form.addEventListener("keydown", handleFormKeydown);
 els.flashcard.addEventListener("click", flipCard);
@@ -409,4 +442,5 @@ els.markLearning.addEventListener("click", () => markCard("learning"));
 els.restart.addEventListener("click", restartReview);
 document.addEventListener("keydown", handleKeydown);
 
+applyTheme(loadTheme());
 render();
