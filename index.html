@@ -4,6 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Flashcards</title>
+  <script>
+    // Applies the saved theme before the first paint so dark mode does not flash light.
+    try {
+      if (localStorage.getItem("flashcards.theme") === "dark") {
+        document.documentElement.dataset.theme = "dark";
+      }
+    } catch (err) {
+      // Storage is unavailable. Light mode is the default.
+    }
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,6 +21,7 @@
     <div class="container header-inner">
       <h1>Flashcards</h1>
       <p class="stats" id="stats" aria-live="polite"></p>
+      <button type="button" class="btn btn-small theme-toggle" id="theme-toggle">Switch to Dark Mode</button>
     </div>
   </header>
 
