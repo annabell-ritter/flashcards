@@ -1,6 +1,7 @@
 "use strict";
 
 const STORAGE_KEY = "flashcards.cards";
+// The inline script in index.html repeats this key. Keep both in sync.
 const THEME_KEY = "flashcards.theme";
 const STATUSES = ["new", "known", "learning"];
 const STATUS_LABELS = { new: "New", known: "Known", learning: "Still learning" };

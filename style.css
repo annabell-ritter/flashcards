@@ -116,6 +116,11 @@ h1 {
   line-height: 1.2;
 }
 
+/* Pushes the stats and theme toggle together to the right. */
+.header-inner h1 {
+  margin-right: auto;
+}
+
 .stats {
   color: var(--text-muted);
 }
@@ -202,7 +207,7 @@ textarea:focus-visible {
 }
 
 textarea[aria-invalid="true"] {
-  border-color: var(--danger);
+  border-color: var(--danger-text);
 }
 
 .form-error {
@@ -254,7 +259,7 @@ textarea[aria-invalid="true"] {
 .btn-secondary {
   color: var(--primary-text);
   background: var(--surface);
-  border-color: var(--primary);
+  border-color: var(--primary-text);
 }
 
 .btn-secondary:hover { background: var(--surface-alt); }
@@ -262,7 +267,7 @@ textarea[aria-invalid="true"] {
 .btn-danger {
   color: var(--danger-text);
   background: var(--surface);
-  border-color: var(--danger);
+  border-color: var(--danger-text);
 }
 
 .btn-danger:hover { background: var(--danger-soft); }

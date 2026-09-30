@@ -6,6 +6,7 @@
   <title>Flashcards</title>
   <script>
     // Applies the saved theme before the first paint so dark mode does not flash light.
+    // The key must match THEME_KEY in app.js.
     try {
       if (localStorage.getItem("flashcards.theme") === "dark") {
         document.documentElement.dataset.theme = "dark";
